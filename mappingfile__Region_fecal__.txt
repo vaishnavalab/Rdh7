@@ -1,0 +1,8 @@
+#SampleID	BarcodeSequence	LinkerPrimerSequence	MouseID	Region	Genotype	Description
+Run4KD51.fastq	x	x	5	fecal	dIEC	Mayaras
+Run4KD52.fastq	x	x	6	fecal	dIEC	Mayaras
+Run4KD53.fastq	x	x	9	fecal	dIEC	Mayaras
+Run4KD54.fastq	x	x	2	fecal	flox	Mayaras
+Run4KD55.fastq	x	x	3	fecal	flox	Mayaras
+Run4KD56.fastq	x	x	4	fecal	flox	Mayaras
+Run4KD57.fastq	x	x	10	fecal	flox	Mayaras

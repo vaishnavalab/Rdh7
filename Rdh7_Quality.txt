@@ -1,0 +1,28 @@
+Quality Filtering/OTU Table
+```
+java -jar /gpfs/data/cbc/cbcollab/anaconda2/envs/kellyann_qiime/share/trimmomatic-0.36-3/trimmomatic.jar PE -phred33 *_R1_001.fastq.gz *_R2_001.fastq.gz output_forward_paired.fastq output_forward_unpaired.fastq output_reverse_paired.fastq output_reverse_unpaired.fastq ILLUMINACLIP:SeqAdaptor:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:17 MINLEN:100
+join_paired_ends.py -f output_forward_paired.fastq -r output_reverse_paired.fastq -o paired -j 20 -p 20
+rm paired/fastqjoin.un1.fastq
+rm paired/fastqjoin.un2.fastq 
+mv paired/fastqjoin.join.fastq paired/Run4KD##.fastq
+multiple_split_libraries_fastq.py -i paired/ -o split -p ~/data/kjduncan/parameters.txt
+pick_closed_reference_otus.py -i split/seqs.fna -o closed_ref
+biom summarize-table -i closed_ref/otu_table.biom
+
+```
+KD51 - 36364.0
+KD52 - 48521.0
+KD53 - 22676.0
+KD54 - 31855.0
+KD55 - 31391.0
+KD56 - 43265.0
+KD57 - 40130.0
+```
+Merge Sample
+```
+merge_otu_tables.py -i KD51-34605092/closed_ref/otu_table.biom,KD52-34605104/closed_ref/otu_table.biom,KD53-34605116/closed_ref/otu_table.biom,KD54-34605128/closed_ref/otu_table.biom,KD55-34605045/closed_ref/otu_table.biom,KD56-34605057/closed_ref/otu_table.biom,KD57-34605069/closed_ref/otu_table.biom -o otu_table.biom
+```
+Filter OTUs
+```
+filter_otus_from_otu_table.py -i otu_table.biom -o otu_table_filtered_min3samp -s 3
+
